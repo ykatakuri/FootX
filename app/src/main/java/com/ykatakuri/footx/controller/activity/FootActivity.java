@@ -13,7 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.tabs.TabLayout;
 import com.ykatakuri.footx.R;
-import com.ykatakuri.footx.controller.TabFragmentAdapter;
+import com.ykatakuri.footx.adapter.TabFragmentAdapter;
 
 public class FootActivity extends AppCompatActivity {
 
