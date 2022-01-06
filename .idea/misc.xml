@@ -14,6 +14,7 @@
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_event.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_suggestion.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_navbar.xml" value="0.1" />
         <entry key="app/src/main/res/menu/navbar_menu.xml" value="0.1" />
       </map>
