@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/edittext_bg.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18229166666666666" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.1" />
       </map>
     </option>
   </component>
