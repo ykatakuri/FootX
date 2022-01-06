@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FootX">
         <activity
+            android:name=".controller.activity.FieldActivity"
+            android:exported="false" />
+        <activity
             android:name=".controller.activity.ProfileActivity"
             android:exported="false" />
         <activity
