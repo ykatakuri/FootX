@@ -4,12 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.activity.HomeActivity">
+    tools:context=".controller.activity.FootActivity">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/foot_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/foot_view_pager2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/foot_tab_layout" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home"
+        android:text="Foot"
         android:textSize="50dp"
         android:textStyle="bold"
         android:layout_centerInParent="true"

@@ -11,7 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FootX">
         <activity
-            android:name=".controller.activity.HomeActivity"
+            android:name=".controller.activity.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controller.activity.ExploreActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controller.activity.ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controller.activity.FootActivity"
             android:exported="false" />
         <activity
             android:name=".controller.activity.RegisterActivity"
