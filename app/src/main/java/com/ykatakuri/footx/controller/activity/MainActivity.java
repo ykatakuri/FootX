@@ -1,8 +1,10 @@
-package com.ykatakuri.footx;
+package com.ykatakuri.footx.controller.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.ykatakuri.footx.R;
 
 public class MainActivity extends AppCompatActivity {
 
