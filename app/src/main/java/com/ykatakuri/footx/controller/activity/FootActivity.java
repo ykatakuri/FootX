@@ -2,6 +2,8 @@ package com.ykatakuri.footx.controller.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,11 +11,17 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.tabs.TabLayout;
 import com.ykatakuri.footx.R;
+import com.ykatakuri.footx.controller.TabFragmentAdapter;
 
 public class FootActivity extends AppCompatActivity {
 
     BottomNavigationView mBottomNavigationView;
+
+    TabLayout mTabLayout;
+    ViewPager2 mPager2;
+    TabFragmentAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +53,41 @@ public class FootActivity extends AppCompatActivity {
                 }
 
                 return false;
+            }
+        });
+
+        mTabLayout = findViewById(R.id.foot_tab_layout);
+        mPager2 = findViewById(R.id.foot_view_pager2);
+
+        FragmentManager mFragmentManager = getSupportFragmentManager();
+        mAdapter = new TabFragmentAdapter(mFragmentManager, getLifecycle());
+        mPager2.setAdapter(mAdapter);
+
+        mTabLayout.addTab(mTabLayout.newTab().setText("Evénements"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("Suggestions"));
+
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mPager2.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
+        mPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                mTabLayout.selectTab(mTabLayout.getTabAt(position));
             }
         });
     }

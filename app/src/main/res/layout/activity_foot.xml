@@ -9,7 +9,12 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/foot_tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        app:tabBackground="@color/black"
+        app:tabTextColor="@color/white"
+        app:tabIndicatorColor="@color/teal_200"
+        app:tabSelectedTextColor="@color/teal_200"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/foot_view_pager2"
