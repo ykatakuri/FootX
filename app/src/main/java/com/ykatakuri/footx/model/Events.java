@@ -1,17 +1,26 @@
 package com.ykatakuri.footx.model;
 
 public class Events {
-    String field, phone, date, time, format;
+    String  author, field, phone, date, time, format;
 
     public Events() {
     }
 
-    public Events(String field, String phone, String date, String time, String format) {
+    public Events(String author, String field, String phone, String date, String time, String format) {
+        this.author = author;
         this.field = field;
         this.phone = phone;
         this.date = date;
         this.time = time;
         this.format = format;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getField() {
