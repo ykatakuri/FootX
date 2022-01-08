@@ -1,32 +1,28 @@
 package com.ykatakuri.footx.model;
 
 public class Field {
-    private String imageName;
-    private String fieldName;
-    private String description;
     private String address;
+    private String cardImage;
+    private String description;
+    private String detailImage;
+    private String name;
 
-    public Field(String imageName, String fieldName, String description, String address) {
-        this.imageName= imageName;
-        this.fieldName= fieldName;
-        this.description= description;
+    public Field() {}
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getImageName() {
-        return imageName;
+    public String getCardImage() {
+        return cardImage;
     }
 
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
-    }
-
-    public String getFieldName() {
-        return fieldName;
-    }
-
-    public void setFieldName(String fieldName) {
-        this.fieldName = fieldName;
+    public void setCardImage(String cardImage) {
+        this.cardImage = cardImage;
     }
 
     public String getDescription() {
@@ -37,16 +33,19 @@ public class Field {
         this.description = description;
     }
 
-    public String getAddress() {
-        return address;
+    public String getDetailImage() {
+        return detailImage;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setDetailImage(String detailImage) {
+        this.detailImage = detailImage;
     }
 
-    @Override
-    public String toString()  {
-        return this.fieldName+" (Adresse: "+ this.address+")";
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

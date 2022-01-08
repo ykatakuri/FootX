@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,8 @@ public class EventFragment extends Fragment {
 
     Activity mContext;
 
+    Button mCreateButton;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -26,19 +29,17 @@ public class EventFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_event, container, false);
 
-        return view;
-    }
+        mCreateButton = view.findViewById(R.id.event_button_create);
 
-    public void onStart() {
-        super.onStart();
-
-        Button mCreateButton = mContext.findViewById(R.id.event_button_create);
         mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, FieldActivity.class);
-                startActivity(intent);
+                FragmentTransaction fragmentTransaction = getParentFragment().getParentFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.body_container, new FormFragment());
+                fragmentTransaction.commit();
             }
         });
+
+        return view;
     }
 }

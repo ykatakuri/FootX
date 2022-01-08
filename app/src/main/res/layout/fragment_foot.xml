@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.activity.FootActivity">
+    tools:context=".controller.fragment.FootFragment"
+    android:background="@android:color/holo_orange_dark"
+    android:id="@+id/foot_container">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/foot_tab_layout"
@@ -14,22 +17,13 @@
         app:tabBackground="@color/black"
         app:tabTextColor="@color/white"
         app:tabIndicatorColor="@color/teal_200"
-        app:tabSelectedTextColor="@color/teal_200"/>
+        app:tabSelectedTextColor="@color/white"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/foot_view_pager2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/foot_tab_layout" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/bottom_navbar"
-        android:background="@color/black"
-        app:itemTextColor="@drawable/item_selector"
-        app:itemIconTint="@drawable/item_selector"
-        app:menu="@menu/menu_navbar"
-        android:layout_alignParentBottom="true"/>
+        android:layout_below="@id/foot_tab_layout">
+    </androidx.viewpager2.widget.ViewPager2>
 
 </RelativeLayout>
