@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ykatakuri.footx">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:fullBackupOnly="true"
@@ -11,16 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FootX">
         <activity
-            android:name=".controller.activity.ProfileActivity"
+            android:name=".controller.activity.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.activity.ExploreActivity"
-            android:exported="false" />
-        <activity
-            android:name=".controller.activity.ChatActivity"
-            android:exported="false" />
-        <activity
-            android:name=".controller.activity.FootActivity"
+            android:name=".controller.activity.FieldActivity"
             android:exported="false" />
         <activity
             android:name=".controller.activity.RegisterActivity"

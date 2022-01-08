@@ -3,13 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.fragment.SuggestionFragment">
+    tools:context=".controller.fragment.SuggestionFragment"
+    android:background="@android:color/holo_purple">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:text="Suggestion fragment" />
+        android:text="Suggestion fragment"
+        android:textSize="30dp"
+        android:textColor="@color/black"/>
 
 </FrameLayout>

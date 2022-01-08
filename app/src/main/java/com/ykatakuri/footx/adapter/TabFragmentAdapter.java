@@ -1,4 +1,4 @@
-package com.ykatakuri.footx.controller;
+package com.ykatakuri.footx.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
