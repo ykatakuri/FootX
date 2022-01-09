@@ -76,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
             mProgressDialog.setCanceledOnTouchOutside(false);
             mProgressDialog.show();
 
+
+
             mFirebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {

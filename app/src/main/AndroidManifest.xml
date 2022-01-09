@@ -16,9 +16,6 @@
             android:name=".controller.activity.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.activity.FieldActivity"
-            android:exported="false" />
-        <activity
             android:name=".controller.activity.RegisterActivity"
             android:exported="false" />
         <activity

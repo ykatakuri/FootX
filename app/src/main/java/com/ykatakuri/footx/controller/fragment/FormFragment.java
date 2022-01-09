@@ -44,7 +44,7 @@ public class FormFragment extends Fragment {
     ArrayAdapter<String> adapterItems;
 
     private Button mCreateButton;
-    private TextView mDateTextView, mTimeTextView;
+    private TextView mDateTextView, mTimeTextView, mAuthorTextView;
     private EditText mPhoneEditText;
     private RadioGroup mFormatRadioGroup;
     private RadioButton mFormatOptionRadioButton;
@@ -55,7 +55,7 @@ public class FormFragment extends Fragment {
 
     FragmentFormBinding binding;
 
-    String field, phone, date, time, format;
+    String author, field, phone, date, time, format;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
@@ -66,6 +66,7 @@ public class FormFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_form, container, false);
 
         autoCompleteTextView = view.findViewById(R.id.form_textview_autocomplete);
+        mAuthorTextView = view.findViewById(R.id.form_textview_author);
         mPhoneEditText = view.findViewById(R.id.form_edittext_phone);
         mDateTextView = view.findViewById(R.id.form_textview_datepicker);
         mTimeTextView = view.findViewById(R.id.form_textview_timepicker);
@@ -139,6 +140,7 @@ public class FormFragment extends Fragment {
         mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                author = mAuthorTextView.getText().toString();
                 field = autoCompleteTextView.getText().toString();
                 phone = mPhoneEditText.getText().toString();
                 date = mDateTextView.getText().toString();
@@ -148,9 +150,9 @@ public class FormFragment extends Fragment {
                 mFormatOptionRadioButton = view.findViewById(selectedOptionId);
                 format = mFormatOptionRadioButton.getText().toString();
 
-                if (!field.isEmpty() && !phone.isEmpty() && !date.isEmpty() && !time.isEmpty() && !format.isEmpty()) {
+                if (!author.isEmpty() && !field.isEmpty() && !phone.isEmpty() && !date.isEmpty() && !time.isEmpty() && !format.isEmpty()) {
 
-                    Events events = new Events(field, phone, date, time, format);
+                    Events events = new Events(author, field, phone, date, time, format);
                     firebaseDatabase = FirebaseDatabase.getInstance();
                     databaseReference = firebaseDatabase.getReference("Events");
                     databaseReference.child(field).setValue(events).addOnCompleteListener(new OnCompleteListener<Void>() {
