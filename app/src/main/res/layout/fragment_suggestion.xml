@@ -6,13 +6,12 @@
     tools:context=".controller.fragment.SuggestionFragment"
     android:background="@android:color/holo_purple">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/suggestion_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Suggestion fragment"
-        android:textSize="30dp"
-        android:textColor="@color/black"/>
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16sp"/>
 
 </FrameLayout>
