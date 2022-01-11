@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="app/src/main/res/layout/cardview_event.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/cardview_suggestion.xml" value="0.25" />
         <entry key="app/src/main/res/layout/field.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/layout/field_list_item.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.18229166666666666" />

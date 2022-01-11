@@ -85,7 +85,7 @@
             app:layout_constraintTop_toBottomOf="@+id/suggestion_cv_textview_date" />
 
         <TextView
-            android:id="@+id/event_cv_textview_format"
+            android:id="@+id/suggestion_cv_textview_format"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -99,7 +99,7 @@
             app:layout_constraintTop_toBottomOf="@+id/suggestion_cv_textview_time" />
 
         <Button
-            android:id="@+id/event_cv_button_delete"
+            android:id="@+id/suggestion_cv_button_participate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
