@@ -1,26 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/event_relative_layout_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.fragment.EventFragment"
-    android:background="@android:color/holo_green_light">
-
-    <Button
-        android:id="@+id/event_button_create"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Créer un foot"
-        android:background="@color/black"
-        android:textColor="@color/white"
-        android:layout_gravity="top"
-        android:layout_margin="16dp"/>
+    android:background="@color/white"
+    tools:context=".controller.fragment.EventFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/event_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="90sp"/>
-</FrameLayout>
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/event_recyclerview_item" />
+
+    <ProgressBar
+        android:id="@+id/event_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/progress_back" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/event_floatingactionbutton_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="90dp"
+        android:src="@drawable/ic_edit"
+        app:background="@color/black"
+        app:backgroundTint="@color/black"
+        app:tint="@color/white" />
+
+</RelativeLayout>

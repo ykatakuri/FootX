@@ -13,7 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FootX">
         <activity
-            android:name=".controller.activity.HomeActivity"
+            android:name=".controller.activity.EditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controller.activity.CreateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controller.activity.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".controller.activity.RegisterActivity"

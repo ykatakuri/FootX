@@ -21,83 +21,91 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.ykatakuri.footx.R;
 
-public class RegisterActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
-    private TextView mLoginTextView;
-    private EditText mEmailEditText, mPasswordEditText, mConfirmPasswordEditText;
-    private Button mRegisterButton;
+    private TextView mRegisterTextView;
+    private EditText mEmailEditText, mPasswordEditText;
+    private Button mLoginButton;
+
     private ProgressDialog mProgressDialog;
 
     private FirebaseAuth mFirebaseAuth;
-    private FirebaseUser mFirebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_login);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        mLoginTextView = findViewById(R.id.register_textview_login);
-        mEmailEditText = findViewById(R.id.register_edittext_email);
-        mPasswordEditText = findViewById(R.id.register_edittext_password1);
-        mConfirmPasswordEditText = findViewById(R.id.register_edittext_password2);
-        mRegisterButton = findViewById(R.id.register_button_register);
+        mRegisterTextView = findViewById(R.id.login_textview_register);
+        mEmailEditText = findViewById(R.id.login_edittext_email);
+        mPasswordEditText = findViewById(R.id.login_edittext_password);
+        mLoginButton = findViewById(R.id.login_button_login);
         mProgressDialog = new ProgressDialog(this);
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
-        mLoginTextView.setOnClickListener(new View.OnClickListener() {
+        mRegisterTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
 
-        mRegisterButton.setOnClickListener(new View.OnClickListener() {
+        mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                performRegistration();
+                performLogin();
             }
         });
     }
 
-    private void performRegistration() {
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        if (user != null) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            this.finish();
+        }
+    }
+
+    private void performLogin() {
         String email = mEmailEditText.getText().toString();
         String password= mPasswordEditText.getText().toString();
-        String confirmPassword = mConfirmPasswordEditText.getText().toString();
 
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             mEmailEditText.setError("Email incorrect");
             mEmailEditText.requestFocus();
         } else if(password.isEmpty() || password.length() < 8) {
             mPasswordEditText.setError("Mot de passe incorrect");
-        } else if(!password.equals(confirmPassword)) {
-            mPasswordEditText.setError("Les deux mots de passe sont différents");
-        } else{
-            mProgressDialog.setMessage("Inscription en cours...");
-            mProgressDialog.setTitle("Inscription");
+        } else {
+            mProgressDialog.setMessage("Connexion en cours...");
+            mProgressDialog.setTitle("Connexion");
             mProgressDialog.setCanceledOnTouchOutside(false);
             mProgressDialog.show();
 
-            mFirebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mFirebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         mProgressDialog.dismiss();
-                        sendUserToLoginActivity();
-                        Toast.makeText(RegisterActivity.this, "Inscription terminée!", Toast.LENGTH_SHORT).show();
-                    }else{
+                        Toast.makeText(LoginActivity.this, "Connexion réussie!", Toast.LENGTH_SHORT).show();
+                        sendUserToHomeActivity();
+                    } else {
                         mProgressDialog.dismiss();
-                        Toast.makeText(RegisterActivity.this, "Echec de l'inscription! Veuillez réessayer"+task.getException(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Connexion échouée...Veuillez réessayer!" + task.getException(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }
     }
 
-    private void sendUserToLoginActivity() {
-        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+    private void sendUserToHomeActivity() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        this.finish();
     }
 }

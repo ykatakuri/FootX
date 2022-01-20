@@ -1,4 +1,7 @@
-package com.ykatakuri.footx.controller.fragment;
+package com.ykatakuri.footx.controller.activity;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -6,47 +9,37 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ykatakuri.footx.R;
-import com.ykatakuri.footx.controller.activity.MainActivity;
-import com.ykatakuri.footx.databinding.FragmentFormBinding;
 import com.ykatakuri.footx.model.Events;
 
 import java.util.Calendar;
 
-public class FormFragment extends Fragment {
+public class CreateActivity extends AppCompatActivity {
 
-    String[] field_items = {"Borderouge", "Struxiano", "Argoulets", "Bagatelle"};
+    private String[] field_items = {"Borderouge", "Struxiano", "Argoulets", "Bagatelle"};
 
-    AutoCompleteTextView autoCompleteTextView;
+    private AutoCompleteTextView autoCompleteTextView;
 
-    ArrayAdapter<String> adapterItems;
+    private ArrayAdapter<String> adapterItems;
 
     private Button mCreateButton;
     private TextView mDateTextView, mTimeTextView, mAuthorTextView;
@@ -55,29 +48,28 @@ public class FormFragment extends Fragment {
     private RadioButton mFormatOptionRadioButton;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;
+    private ProgressBar mProgressBar;
 
     private String author, field, phone, date, time, format, eventID;
+
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_form, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_create);
 
-        autoCompleteTextView = view.findViewById(R.id.form_textview_autocomplete);
-        mAuthorTextView = view.findViewById(R.id.form_textview_author);
-        mPhoneEditText = view.findViewById(R.id.form_edittext_phone);
-        mDateTextView = view.findViewById(R.id.form_textview_datepicker);
-        mTimeTextView = view.findViewById(R.id.form_textview_timepicker);
-        mFormatRadioGroup = view.findViewById(R.id.form_radiogroup_format);
-        mCreateButton = view.findViewById(R.id.form_button_create);
+        autoCompleteTextView = findViewById(R.id.create_textview_autocomplete);
+        mAuthorTextView = findViewById(R.id.create_textview_author);
+        mPhoneEditText = findViewById(R.id.create_edittext_phone);
+        mDateTextView = findViewById(R.id.create_textview_datepicker);
+        mTimeTextView = findViewById(R.id.create_textview_timepicker);
+        mFormatRadioGroup = findViewById(R.id.create_radiogroup_format);
+        mCreateButton = findViewById(R.id.create_button_create);
+        mProgressBar = findViewById(R.id.create_progressbar);
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Events");
-
-        adapterItems = new ArrayAdapter<String>(this.getContext(), R.layout.field_list_item, field_items);
+        adapterItems = new ArrayAdapter<String>(this, R.layout.field_list_item, field_items);
 
         autoCompleteTextView.setAdapter(adapterItems);
 
@@ -85,7 +77,7 @@ public class FormFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
-                Toast.makeText(getContext(), "Item: " + item, Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateActivity.this, "Votre choix: " + item, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -98,7 +90,7 @@ public class FormFragment extends Fragment {
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog = new DatePickerDialog(
-                        getContext(),
+                        CreateActivity.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener,
                         year,month,day);
@@ -124,7 +116,7 @@ public class FormFragment extends Fragment {
                 int hour = cal.get(Calendar.HOUR);
                 int minute = cal.get(Calendar.MINUTE);
 
-                TimePickerDialog dialog = new TimePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                TimePickerDialog dialog = new TimePickerDialog(CreateActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mTimeSetListener,
                         hour,minute, true);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -141,18 +133,23 @@ public class FormFragment extends Fragment {
             }
         };
 
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Events");
+
         mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgressBar.setVisibility(View.VISIBLE);
+
                 author = mAuthorTextView.getText().toString();
                 field = autoCompleteTextView.getText().toString();
                 phone = mPhoneEditText.getText().toString();
                 date = mDateTextView.getText().toString();
                 time = mTimeTextView.getText().toString();
-                eventID = date+"-"+time;
+                eventID = field;
 
                 int selectedOptionId = mFormatRadioGroup.getCheckedRadioButtonId();
-                mFormatOptionRadioButton = view.findViewById(selectedOptionId);
+                mFormatOptionRadioButton = findViewById(selectedOptionId);
                 format = mFormatOptionRadioButton.getText().toString();
 
                 if (!author.isEmpty() && !field.isEmpty() && !phone.isEmpty() && !date.isEmpty() && !time.isEmpty() && !format.isEmpty()) {
@@ -163,22 +160,18 @@ public class FormFragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             databaseReference.child(eventID).setValue(event);
-                            Toast.makeText(getContext(), "Foot créé !", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getContext(), MainActivity.class));
+                            Toast.makeText(CreateActivity.this, "Foot créé !", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(CreateActivity.this, MainActivity.class));
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-                            Toast.makeText(getContext(), "Echec lors de la création...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateActivity.this, "Echec lors de la création...", Toast.LENGTH_SHORT).show();
                         }
                     });
 
                 }
-
-
             }
         });
-
-        return view;
     }
 }
