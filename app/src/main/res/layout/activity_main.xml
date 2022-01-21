@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/body_container"
-    android:background="@android:color/holo_purple"
     tools:context=".controller.activity.MainActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
