@@ -9,6 +9,15 @@
     android:background="@color/white"
     tools:context=".controller.fragment.ChatFragment">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="16dp"
+        android:text="Cliquez sur le bouton en bas à droite pour commencer une discussion de groupe."
+        android:textColor="@color/black"/>
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/chat_floatingactionbutton_chat"
         android:layout_width="wrap_content"
