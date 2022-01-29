@@ -7,11 +7,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,6 +24,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ykatakuri.footx.R;
+import com.ykatakuri.footx.controller.activity.RegisterActivity;
 
 public class ExploreFragment extends Fragment {
 
@@ -44,11 +47,10 @@ public class ExploreFragment extends Fragment {
             e.printStackTrace();
         }
         mMapView.getMapAsync(new OnMapReadyCallback() {
-            @SuppressLint("MissingPermission")
             @Override
             public void onMapReady(@NonNull GoogleMap googleMap) {
 
-                googleMap.setMyLocationEnabled(true);
+                googleMap.getUiSettings().setMyLocationButtonEnabled(true);
 
                 LatLng toulouse = new LatLng(-34, 151);
                 googleMap.addMarker(new MarkerOptions().position(toulouse).title("Marker Title").snippet("Marker Description"));
